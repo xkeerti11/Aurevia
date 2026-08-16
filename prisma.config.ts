@@ -1,8 +1,11 @@
 import { defineConfig } from 'prisma/config';
+import dotenv from 'dotenv';
+
+dotenv.config();
 
 export default defineConfig({
   schema: './server/prisma/schema.prisma',
   datasource: {
-    url: 'file:./dev.db'
+    url: process.env.DATABASE_URL || 'file:./dev.db'
   }
 });
