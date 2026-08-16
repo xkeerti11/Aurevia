@@ -1,0 +1,106 @@
+:root {
+  /* ==========================================================================
+     AUREVIA HEALTH DESIGN TOKENS
+     ========================================================================== */
+
+  /* --- Primary Teal Palette (Healing & Trust) --- */
+  --primary: #0F766E;
+  --primary-dark: #0D5F5A;
+  --primary-darker: #093D3B;
+  --primary-light: #14B8A6;
+  --primary-lighter: #2DD4BF;
+  --primary-accent: #45C7B7;
+  --primary-alpha-10: rgba(15, 118, 110, 0.1);
+  --primary-alpha-15: rgba(15, 118, 110, 0.15);
+  --primary-alpha-20: rgba(20, 184, 166, 0.2);
+
+  /* --- Secondary Blue Palette (Professionalism) --- */
+  --secondary: #0369A1;
+  --secondary-dark: #075985;
+  --secondary-light: #0284C7;
+  --secondary-lighter: #38BDF8;
+  --secondary-alpha-10: rgba(3, 105, 161, 0.1);
+
+  /* --- Neutral & Surface Palette --- */
+  --surface: #FFFFFF;
+  --surface-soft: #F8FAFD;
+  --surface-softer: #F1F6F5;
+  --surface-dark: #E8F4F2;
+  --background: #F7FAF9;
+
+  /* --- Text Hierarchy --- */
+  --text-primary: #0F172A;
+  --text-secondary: #475569;
+  --text-tertiary: #64748B;
+  --text-muted: #94A3B8;
+  --text-on-dark: #F8FAFC;
+  --text-inverse: #FFFFFF;
+
+  /* --- Borders & Dividers --- */
+  --border: #E2E8F0;
+  --border-subtle: #F1F6F5;
+  --border-strong: #CBD5E1;
+  --border-focus: #0F766E;
+
+  /* --- Semantic Colors --- */
+  --success: #16A34A;
+  --success-light: #22C55E;
+  --success-bg: #DCFCE7;
+  --warning: #D97706;
+  --warning-light: #F59E0B;
+  --warning-bg: #FEF3C7;
+  --error: #DC2626;
+  --error-light: #EF4444;
+  --error-bg: #FEE2E2;
+  --info: #0284C7;
+  --info-light: #0EA5E9;
+  --info-bg: #E0F2FE;
+
+  /* --- Social & Brand Colors --- */
+  --whatsapp: #25D366;
+  --whatsapp-dark: #128C7E;
+
+  /* --- Typography --- */
+  --font-primary: 'Geist Sans', 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --font-body: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --font-mono: 'Geist Mono', ui-monospace, SFMono-Regular, monospace;
+
+  /* --- Spacing Scale (4px base) --- */
+  --space-2xs: 2px;
+  --space-xs: 4px;
+  --space-sm: 8px;
+  --space-md: 12px;
+  --space-base: 16px;
+  --space-lg: 24px;
+  --space-xl: 32px;
+  --space-2xl: 48px;
+  --space-3xl: 64px;
+  --space-4xl: 80px;
+  --space-5xl: 96px;
+
+  /* --- Elevation & Shadows --- */
+  --elevation-0: none;
+  --elevation-1: 0 1px 3px rgba(15, 23, 42, 0.06), 0 1px 2px rgba(15, 23, 42, 0.04);
+  --elevation-2: 0 4px 12px rgba(15, 23, 42, 0.08), 0 2px 4px rgba(15, 23, 42, 0.03);
+  --elevation-3: 0 8px 24px rgba(15, 23, 42, 0.10), 0 3px 6px rgba(15, 23, 42, 0.04);
+  --elevation-4: 0 12px 32px rgba(15, 23, 42, 0.12), 0 4px 8px rgba(15, 23, 42, 0.05);
+  --elevation-5: 0 20px 60px rgba(15, 23, 42, 0.15), 0 6px 12px rgba(15, 23, 42, 0.06);
+  --elevation-6: 0 24px 80px rgba(15, 23, 42, 0.18);
+  --shadow-glow: 0 0 24px rgba(20, 184, 166, 0.22), 0 4px 12px rgba(15, 23, 42, 0.08);
+
+  /* --- Radii --- */
+  --radius-xs: 6px;
+  --radius-sm: 10px;
+  --radius-md: 16px;
+  --radius-lg: 20px;
+  --radius-xl: 24px;
+  --radius-full: 9999px;
+
+  /* --- Motion & Transitions --- */
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-in-out: cubic-bezier(0.4, 0, 0.2, 1);
+  --duration-fast: 150ms;
+  --duration-normal: 250ms;
+  --duration-slow: 350ms;
+  --duration-slower: 500ms;
+}

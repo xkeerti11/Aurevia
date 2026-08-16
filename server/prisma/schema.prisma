@@ -1,0 +1,146 @@
+datasource db {
+  provider = "sqlite"
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+model User {
+  id                        String          @id @default(uuid())
+  email                     String          @unique
+  emailNormalized           String?         @unique
+  passwordHash              String
+  role                      String          @default("staff") // owner, admin, staff, receptionist, editor
+  name                      String
+  phone                     String?
+  isActive                  Boolean         @default(true)
+  emailVerified             Boolean         @default(false)
+  failedLoginAttempts       Int             @default(0)
+  lastFailedLoginAt         DateTime?
+  lockedUntil               DateTime?
+  passwordResetToken        String?
+  passwordResetExpires      DateTime?
+  lastLoginAt               DateTime?
+  lastLoginIp               String?
+  createdAt                 DateTime        @default(now())
+  updatedAt                 DateTime        @updatedAt
+  doctor                    Doctor?
+  auditLogs                 AuditLog[]
+  loginLogs                 AdminLoginLog[]
+}
+
+model AdminLoginLog {
+  id           String   @id @default(uuid())
+  userId       String?
+  user         User?    @relation(fields: [userId], references: [id], onDelete: Cascade)
+  email        String
+  ipAddress    String
+  userAgent    String?
+  loginStatus  String   // success, failed_password, failed_locked, invalid_email, rate_limited
+  errorMessage String?
+  createdAt    DateTime @default(now())
+}
+
+model Doctor {
+  id              String           @id @default(uuid())
+  userId          String?          @unique
+  user            User?            @relation(fields: [userId], references: [id])
+  slug            String           @unique
+  name            String
+  title           String
+  specialty       String
+  qualifications  String
+  experienceYears Int
+  consultationFee Float
+  bio             String
+  avatarUrl       String
+  isActive        Boolean          @default(true)
+  createdAt       DateTime         @default(now())
+  updatedAt       DateTime         @updatedAt
+  schedules       DoctorSchedule[]
+  appointments    Appointment[]
+}
+
+model DoctorSchedule {
+  id              String  @id @default(uuid())
+  doctorId        String
+  doctor          Doctor  @relation(fields: [doctorId], references: [id], onDelete: Cascade)
+  dayOfWeek       Int // 0 = Sunday, 1 = Monday, ... 6 = Saturday
+  startTime       String // "09:00"
+  endTime         String // "17:00"
+  slotDurationMin Int     @default(30)
+  isAvailable     Boolean @default(true)
+}
+
+model Service {
+  id               String        @id @default(uuid())
+  slug             String        @unique
+  name             String
+  category         String
+  shortDescription String
+  fullDescription  String
+  durationMinutes  Int           @default(30)
+  startingPrice    Float
+  isPopular        Boolean       @default(false)
+  isActive         Boolean       @default(true)
+  imageUrl         String?
+  createdAt        DateTime      @default(now())
+  appointments     Appointment[]
+}
+
+model Patient {
+  id             String        @id @default(uuid())
+  name           String
+  phone          String        @unique
+  email          String?
+  dateOfBirth    String?
+  encryptedNotes String?
+  createdAt      DateTime      @default(now())
+  appointments   Appointment[]
+}
+
+model Appointment {
+  id               String   @id @default(uuid())
+  confirmationCode String   @unique
+  patientId        String
+  patient          Patient  @relation(fields: [patientId], references: [id])
+  doctorId         String
+  doctor           Doctor   @relation(fields: [doctorId], references: [id])
+  serviceId        String
+  service          Service  @relation(fields: [serviceId], references: [id])
+  appointmentDate  String
+  timeSlot         String
+  status           String   @default("CONFIRMED")
+  reasonForVisit   String?
+  notes            String?
+  createdAt        DateTime @default(now())
+  updatedAt        DateTime @updatedAt
+
+  @@unique([doctorId, appointmentDate, timeSlot])
+}
+
+model Lead {
+  id                String   @id @default(uuid())
+  name              String
+  phone             String
+  email             String?
+  source            String
+  serviceInterested String
+  status            String   @default("NEW")
+  notes             String?
+  createdAt         DateTime @default(now())
+  updatedAt         DateTime @updatedAt
+}
+
+model AuditLog {
+  id        String   @id @default(uuid())
+  userId    String?
+  user      User?    @relation(fields: [userId], references: [id])
+  action    String
+  entity    String
+  entityId  String
+  ipAddress String?
+  userAgent String?
+  timestamp DateTime @default(now())
+}
