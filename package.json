@@ -6,6 +6,7 @@
   "scripts": {
     "dev": "vite",
     "server": "tsx server/src/server.ts",
+    "start": "tsx server/src/server.ts",
     "seed": "tsx server/src/seed.ts",
     "create-admin": "tsx server/src/createAdmin.ts",
     "build": "tsc -b && vite build",
