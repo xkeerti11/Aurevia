@@ -18,7 +18,16 @@ app.use(cors({
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-// Health check
+// Root and Health check endpoints (essential for Render / Cloud deploy monitoring)
+app.get('/', (req, res) => {
+  res.json({
+    status: 'online',
+    service: 'Aurevia Health Backend Core API',
+    documentation: '/api/v1',
+    health: '/health'
+  });
+});
+
 app.get('/health', (req, res) => {
   res.json({
     status: 'online',
@@ -34,12 +43,14 @@ app.use('/api/v1', apiRoutes);
 // Global Error Handler
 app.use(errorHandler);
 
-const PORT = ENV.PORT;
-app.listen(PORT, () => {
+const PORT = Number(process.env.PORT) || Number(ENV.PORT) || 5000;
+const HOST = '0.0.0.0';
+
+app.listen(PORT, HOST, () => {
   console.log(`\n======================================================`);
   console.log(`🏥 [AUREVIA HEALTH BACKEND SERVER RUNNING]`);
-  console.log(`🌐 URL: http://localhost:${PORT}`);
-  console.log(`🩺 Health check: http://localhost:${PORT}/health`);
+  console.log(`🌐 Bound to HOST: ${HOST} | PORT: ${PORT}`);
+  console.log(`🩺 Health check: http://${HOST}:${PORT}/health`);
   console.log(`🛡️ Rate limiting, AES-256 Encryption & Helmet active`);
   console.log(`======================================================\n`);
 });
