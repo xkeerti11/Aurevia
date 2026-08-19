@@ -10,7 +10,11 @@ let adapter: any;
 
 if (dbUrl.startsWith('postgresql://') || dbUrl.startsWith('postgres://')) {
   // Production Cloud PostgreSQL (Supabase / Neon)
-  const pool = new pg.Pool({ connectionString: dbUrl });
+  const pool = new pg.Pool({
+    connectionString: dbUrl,
+    ssl: { rejectUnauthorized: false },
+    connectionTimeoutMillis: 10000
+  });
   adapter = new PrismaPg(pool);
   console.log('🐘 [DATABASE]: Connected to Cloud PostgreSQL (Supabase)');
 } else {
