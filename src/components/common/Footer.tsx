@@ -212,8 +212,12 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate }) => {
             color: '#64748B'
           }}
         >
-          <div>
-            © 2026 Aurevia Health Technologies. All rights reserved. Registered under Clinical Establishments Act.
+          <div style={{ display: 'flex', alignItems: 'center', gap: '8px', flexWrap: 'wrap' }}>
+            <span>© 2026 Aurevia Health Technologies. All rights reserved.</span>
+            <span style={{ color: 'rgba(255, 255, 255, 0.2)' }}>•</span>
+            <span style={{ color: '#E2E8F0', fontWeight: '500' }}>
+              Made with <span style={{ color: '#EF4444' }}>❤️</span> by <strong style={{ color: '#38BDF8', fontWeight: '700' }}>Ktux</strong>
+            </span>
           </div>
 
           <div style={{ display: 'flex', gap: '20px' }}>
