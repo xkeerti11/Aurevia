@@ -24,7 +24,7 @@ export class ServiceController {
 
   public static async getServiceBySlug(req: Request, res: Response): Promise<void> {
     try {
-      const { slug } = req.params;
+      const slug = String(req.params.slug || '');
       const service = await prisma.service.findUnique({
         where: { slug }
       });

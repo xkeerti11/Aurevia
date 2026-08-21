@@ -5,10 +5,8 @@ import {
   Mail, 
   MapPin, 
   Clock, 
-  ArrowUpRight, 
   Heart,
-  Calendar,
-  Lock
+  Calendar
 } from 'lucide-react';
 import { CLINIC_INFO } from '../../data/mockData';
 
@@ -28,23 +26,23 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate }) => {
         background: '#0F172A',
         color: '#F8FAFC',
         borderTop: '1px solid rgba(255, 255, 255, 0.08)',
-        paddingTop: '80px',
-        paddingBottom: '40px',
+        paddingTop: 'clamp(48px, 6vw, 80px)',
+        paddingBottom: '36px',
         position: 'relative'
       }}
     >
       <div className="container">
-        {/* Top 5-Column Grid */}
+        {/* Top 4-Column Grid */}
         <div 
           style={{
             display: 'grid',
-            gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))',
-            gap: '40px',
-            marginBottom: '64px'
+            gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 210px), 1fr))',
+            gap: 'clamp(28px, 4vw, 44px)',
+            marginBottom: 'clamp(36px, 5vw, 64px)'
           }}
         >
           {/* Column 1: Brand & Philosophy */}
-          <div style={{ maxWidth: '300px' }}>
+          <div style={{ maxWidth: '320px' }}>
             <div 
               style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '16px', cursor: 'pointer' }}
               onClick={() => handleNav('/')}
@@ -58,17 +56,18 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate }) => {
                   display: 'flex',
                   alignItems: 'center',
                   justifyContent: 'center',
-                  color: '#fff'
+                  color: '#fff',
+                  flexShrink: 0
                 }}
               >
                 <ShieldCheck size={20} />
               </div>
-              <span style={{ fontSize: '20px', fontWeight: '800', letterSpacing: '-0.5px' }}>
+              <span style={{ fontSize: '19px', fontWeight: '800', letterSpacing: '-0.5px' }}>
                 AUREVIA<span style={{ color: '#14B8A6' }}>HEALTH</span>
               </span>
             </div>
             
-            <p style={{ fontSize: '14px', color: '#94A3B8', lineHeight: '1.6', marginBottom: '20px' }}>
+            <p style={{ fontSize: '13.5px', color: '#94A3B8', lineHeight: '1.6', marginBottom: '16px' }}>
               Transforming private clinical care into a high-trust, patient-first healthcare experience with verified specialists and precision diagnostics.
             </p>
 
@@ -79,118 +78,99 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate }) => {
 
           {/* Column 2: Clinical Specialties */}
           <div>
-            <h4 style={{ fontSize: '15px', fontWeight: '700', textTransform: 'uppercase', letterSpacing: '0.8px', color: '#FFFFFF', marginBottom: '18px' }}>
+            <h4 style={{ fontSize: '14px', fontWeight: '700', textTransform: 'uppercase', letterSpacing: '0.8px', color: '#FFFFFF', marginBottom: '16px' }}>
               Specialties & Care
             </h4>
-            <ul style={{ listStyle: 'none', display: 'flex', flexDirection: 'column', gap: '10px', fontSize: '14px', color: '#94A3B8' }}>
+            <ul style={{ listStyle: 'none', display: 'flex', flexDirection: 'column', gap: '10px', fontSize: '13.5px', color: '#94A3B8' }}>
               <li>
-                <button onClick={() => handleNav('/treatments')} style={{ color: 'inherit', textAlign: 'left' }}>
+                <button onClick={() => handleNav('/treatments')} style={{ color: 'inherit', textAlign: 'left', cursor: 'pointer' }}>
                   Cardiology & Heart Screening
                 </button>
               </li>
               <li>
-                <button onClick={() => handleNav('/treatments')} style={{ color: 'inherit', textAlign: 'left' }}>
+                <button onClick={() => handleNav('/treatments')} style={{ color: 'inherit', textAlign: 'left', cursor: 'pointer' }}>
                   Clinical Dermatology & Lasers
                 </button>
               </li>
               <li>
-                <button onClick={() => handleNav('/treatments')} style={{ color: 'inherit', textAlign: 'left' }}>
+                <button onClick={() => handleNav('/treatments')} style={{ color: 'inherit', textAlign: 'left', cursor: 'pointer' }}>
                   Executive Full Body Checkups
                 </button>
               </li>
               <li>
-                <button onClick={() => handleNav('/treatments')} style={{ color: 'inherit', textAlign: 'left' }}>
-                  Pediatric Care & Immunization
+                <button onClick={() => handleNav('/treatments')} style={{ color: 'inherit', textAlign: 'left', cursor: 'pointer' }}>
+                  Pediatric & Adolescent Medicine
                 </button>
               </li>
               <li>
-                <button onClick={() => handleNav('/treatments')} style={{ color: 'inherit', textAlign: 'left' }}>
-                  Orthopedics & Joint Preservation
-                </button>
-              </li>
-              <li>
-                <button onClick={() => handleNav('/treatments')} style={{ color: 'inherit', textAlign: 'left' }}>
-                  Neurology & Headache Clinic
+                <button onClick={() => handleNav('/treatments')} style={{ color: 'inherit', textAlign: 'left', cursor: 'pointer' }}>
+                  Orthopedics & Joint Restoration
                 </button>
               </li>
             </ul>
           </div>
 
-          {/* Column 3: Quick Navigation */}
+          {/* Column 3: Patient Care Links */}
           <div>
-            <h4 style={{ fontSize: '15px', fontWeight: '700', textTransform: 'uppercase', letterSpacing: '0.8px', color: '#FFFFFF', marginBottom: '18px' }}>
-              Patient Platform
+            <h4 style={{ fontSize: '14px', fontWeight: '700', textTransform: 'uppercase', letterSpacing: '0.8px', color: '#FFFFFF', marginBottom: '16px' }}>
+              Patient Navigation
             </h4>
-            <ul style={{ listStyle: 'none', display: 'flex', flexDirection: 'column', gap: '10px', fontSize: '14px', color: '#94A3B8' }}>
+            <ul style={{ listStyle: 'none', display: 'flex', flexDirection: 'column', gap: '10px', fontSize: '13.5px', color: '#94A3B8' }}>
               <li>
-                <button onClick={() => handleNav('/doctors')} style={{ color: 'inherit' }}>
-                  Meet Specialists
-                </button>
-              </li>
-              <li>
-                <button onClick={() => handleNav('/appointment')} style={{ color: 'inherit' }}>
+                <button onClick={() => handleNav('/appointment')} style={{ color: 'inherit', textAlign: 'left', cursor: 'pointer' }}>
                   Book Online Consultation
                 </button>
               </li>
               <li>
-                <button onClick={() => handleNav('/facilities')} style={{ color: 'inherit' }}>
-                  Clinic Infrastructure & Suites
+                <button onClick={() => handleNav('/doctors')} style={{ color: 'inherit', textAlign: 'left', cursor: 'pointer' }}>
+                  Our Specialist Directory
                 </button>
               </li>
               <li>
-                <button onClick={() => handleNav('/about')} style={{ color: 'inherit' }}>
-                  Our Medical Board & Ethos
+                <button onClick={() => handleNav('/facilities')} style={{ color: 'inherit', textAlign: 'left', cursor: 'pointer' }}>
+                  Clinic Suites & Diagnostic Tech
                 </button>
               </li>
               <li>
-                <button onClick={() => handleNav('/resources')} style={{ color: 'inherit' }}>
-                  Medical Articles & Guides
+                <button onClick={() => handleNav('/about')} style={{ color: 'inherit', textAlign: 'left', cursor: 'pointer' }}>
+                  About Aurevia Healthcare
                 </button>
               </li>
               <li>
-                <button onClick={() => handleNav('/admin')} style={{ color: '#14B8A6', fontWeight: '600' }}>
-                  Clinic Staff & Admin Portal ↗
+                <button onClick={() => handleNav('/resources')} style={{ color: 'inherit', textAlign: 'left', cursor: 'pointer' }}>
+                  Clinical Health Guides & Articles
                 </button>
               </li>
             </ul>
           </div>
 
-          {/* Column 4: Contact & Emergency */}
+          {/* Column 4: Contact & Clinical Hours */}
           <div>
-            <h4 style={{ fontSize: '15px', fontWeight: '700', textTransform: 'uppercase', letterSpacing: '0.8px', color: '#FFFFFF', marginBottom: '18px' }}>
-              Concierge & Hours
+            <h4 style={{ fontSize: '14px', fontWeight: '700', textTransform: 'uppercase', letterSpacing: '0.8px', color: '#FFFFFF', marginBottom: '16px' }}>
+              Clinic Access
             </h4>
-            <div style={{ display: 'flex', flexDirection: 'column', gap: '12px', fontSize: '14px', color: '#94A3B8' }}>
-              <div style={{ display: 'flex', gap: '10px' }}>
-                <Phone size={18} color="#14B8A6" style={{ flexShrink: 0, marginTop: '2px' }} />
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '12px', fontSize: '13.5px', color: '#94A3B8' }}>
+              <div style={{ display: 'flex', gap: '10px', alignItems: 'flex-start' }}>
+                <Phone size={17} color="#14B8A6" style={{ flexShrink: 0, marginTop: '2px' }} />
                 <div>
-                  <a href={`tel:${CLINIC_INFO.phone}`} style={{ color: '#FFFFFF', fontWeight: '600' }}>
+                  <a href={`tel:${CLINIC_INFO.phone}`} style={{ color: '#F8FAFC', fontWeight: '600', display: 'block' }}>
                     {CLINIC_INFO.phone}
                   </a>
-                  <div style={{ fontSize: '12px', color: '#94A3B8' }}>Concierge Desk (8 AM - 8 PM)</div>
+                  <div style={{ fontSize: '12px', color: '#94A3B8' }}>Emergency: {CLINIC_INFO.emergencyPhone}</div>
                 </div>
               </div>
 
-              <div style={{ display: 'flex', gap: '10px' }}>
-                <Mail size={18} color="#14B8A6" style={{ flexShrink: 0, marginTop: '2px' }} />
-                <div>
-                  <a href={`mailto:${CLINIC_INFO.email}`} style={{ color: '#F8FAFC' }}>
-                    {CLINIC_INFO.email}
-                  </a>
-                </div>
-              </div>
-
-              <div style={{ display: 'flex', gap: '10px' }}>
-                <Clock size={18} color="#14B8A6" style={{ flexShrink: 0, marginTop: '2px' }} />
+              <div style={{ display: 'flex', gap: '10px', alignItems: 'flex-start' }}>
+                <Clock size={17} color="#14B8A6" style={{ flexShrink: 0, marginTop: '2px' }} />
                 <div>
                   <div style={{ color: '#F8FAFC', fontWeight: '500' }}>Mon - Sat: 8:00 AM - 8:00 PM</div>
                   <div style={{ fontSize: '12px', color: '#94A3B8' }}>Sun: Emergency Diagnostics Only</div>
                 </div>
               </div>
 
-              <div style={{ display: 'flex', gap: '10px' }}>
-                <MapPin size={18} color="#14B8A6" style={{ flexShrink: 0, marginTop: '2px' }} />
-                <div style={{ fontSize: '13px' }}>
+              <div style={{ display: 'flex', gap: '10px', alignItems: 'flex-start' }}>
+                <MapPin size={17} color="#14B8A6" style={{ flexShrink: 0, marginTop: '2px' }} />
+                <div style={{ fontSize: '13px', lineHeight: '1.4' }}>
                   {CLINIC_INFO.address}, {CLINIC_INFO.city}
                 </div>
               </div>
@@ -201,14 +181,14 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate }) => {
         {/* Bottom Copyright & Security Strip */}
         <div
           style={{
-            paddingTop: '32px',
+            paddingTop: '24px',
             borderTop: '1px solid rgba(255, 255, 255, 0.08)',
             display: 'flex',
             flexWrap: 'wrap',
             alignItems: 'center',
             justifyContent: 'space-between',
-            gap: '16px',
-            fontSize: '13px',
+            gap: '14px',
+            fontSize: '12.5px',
             color: '#64748B'
           }}
         >
@@ -220,7 +200,7 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate }) => {
             </span>
           </div>
 
-          <div style={{ display: 'flex', gap: '20px' }}>
+          <div style={{ display: 'flex', gap: '14px', flexWrap: 'wrap' }}>
             <span>Privacy Policy</span>
             <span>Terms of Care</span>
             <span>HIPAA/GDPR Data Shield</span>

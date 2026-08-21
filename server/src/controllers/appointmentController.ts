@@ -178,7 +178,7 @@ export class AppointmentController {
 
   public static async getAppointmentByCode(req: Request, res: Response): Promise<void> {
     try {
-      const { code } = req.params;
+      const code = String(req.params.code || '');
       const appointment = await prisma.appointment.findUnique({
         where: { confirmationCode: code },
         include: { doctor: true, service: true, patient: true }
@@ -228,7 +228,7 @@ export class AppointmentController {
 
   public static async updateStatus(req: Request, res: Response): Promise<void> {
     try {
-      const { id } = req.params;
+      const id = String(req.params.id || '');
       const { status } = req.body;
 
       const validStatuses = ['CONFIRMED', 'PENDING', 'COMPLETED', 'CANCELLED', 'NO_SHOW'];
@@ -239,17 +239,19 @@ export class AppointmentController {
         return;
       }
 
-      const appointment = await prisma.appointment.update({
+      const appointment: any = await prisma.appointment.update({
         where: { id },
         data: { status: normalizedStatus },
         include: { patient: true, doctor: true }
       });
 
-      NotificationService.sendStatusUpdateNotification(
-        appointment.patient.phone,
-        appointment.confirmationCode,
-        normalizedStatus
-      );
+      if (appointment?.patient?.phone) {
+        NotificationService.sendStatusUpdateNotification(
+          appointment.patient.phone,
+          appointment.confirmationCode,
+          normalizedStatus
+        );
+      }
 
       res.json({ success: true, appointment });
     } catch (err: any) {

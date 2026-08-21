@@ -25,7 +25,7 @@ export class DoctorController {
 
   public static async getDoctorBySlug(req: Request, res: Response): Promise<void> {
     try {
-      const { slug } = req.params;
+      const slug = String(req.params.slug || '');
       const doctor = await prisma.doctor.findUnique({
         where: { slug },
         include: { schedules: true }

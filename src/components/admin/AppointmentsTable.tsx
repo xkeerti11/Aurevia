@@ -85,8 +85,8 @@ export const AppointmentsTable: React.FC<AppointmentsTableProps> = ({
       </div>
 
       {/* Table Container */}
-      <div style={{ overflowX: 'auto' }}>
-        <table style={{ width: '100%', borderCollapse: 'collapse', textAlign: 'left', fontSize: '13px' }}>
+      <div style={{ overflowX: 'auto', WebkitOverflowScrolling: 'touch' }}>
+        <table style={{ width: '100%', minWidth: '680px', borderCollapse: 'collapse', textAlign: 'left', fontSize: '13px' }}>
           <thead>
             <tr style={{ background: 'var(--surface-soft)', borderBottom: '2px solid var(--border)' }}>
               <th style={{ padding: '12px 16px', fontWeight: '700', color: 'var(--text-secondary)' }}>REF ID</th>

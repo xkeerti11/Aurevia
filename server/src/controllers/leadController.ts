@@ -64,7 +64,7 @@ export class LeadController {
 
   public static async updateLeadStatus(req: Request, res: Response): Promise<void> {
     try {
-      const { id } = req.params;
+      const id = String(req.params.id || '');
       const { status } = req.body;
 
       const validStatuses = ['NEW', 'CONTACTED', 'QUALIFIED', 'BOOKED', 'LOST'];

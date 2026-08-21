@@ -12,7 +12,7 @@ export const DarkCtaSection: React.FC<DarkCtaSectionProps> = ({ onBookClick }) =
       style={{
         background: 'linear-gradient(135deg, #093D3B 0%, #0F766E 100%)',
         color: '#FFFFFF',
-        padding: 'clamp(64px, 8vw, 96px) 0',
+        padding: 'clamp(48px, 6vw, 96px) 0',
         position: 'relative',
         overflow: 'hidden'
       }}
@@ -65,19 +65,19 @@ export const DarkCtaSection: React.FC<DarkCtaSectionProps> = ({ onBookClick }) =
             display: 'inline-flex',
             alignItems: 'center',
             gap: '8px',
-            padding: '6px 16px',
+            padding: '6px 14px',
             borderRadius: 'var(--radius-full)',
             background: 'rgba(255, 255, 255, 0.15)',
             backdropFilter: 'blur(8px)',
             color: '#2DD4BF',
-            fontSize: '12px',
+            fontSize: 'clamp(10.5px, 1.2vw, 12px)',
             fontWeight: '700',
             textTransform: 'uppercase',
             letterSpacing: '1px',
-            marginBottom: '20px'
+            marginBottom: '16px'
           }}
         >
-          <ShieldCheck size={16} />
+          <ShieldCheck size={15} />
           <span>YOUR HEALTH DESERVES THE BEST</span>
         </div>
 
@@ -85,8 +85,8 @@ export const DarkCtaSection: React.FC<DarkCtaSectionProps> = ({ onBookClick }) =
           className="display-lg"
           style={{
             color: '#FFFFFF',
-            marginBottom: '20px',
-            fontSize: 'clamp(32px, 4.5vw, 52px)'
+            marginBottom: '16px',
+            fontSize: 'clamp(26px, 3.8vw, 48px)'
           }}
         >
           Ready to Experience Healthcare Without Compromise?
@@ -94,19 +94,22 @@ export const DarkCtaSection: React.FC<DarkCtaSectionProps> = ({ onBookClick }) =
 
         <p 
           style={{
-            fontSize: '18px',
-            color: 'rgba(255, 255, 255, 0.85)',
+            fontSize: 'clamp(14.5px, 1.2vw, 17px)',
+            color: 'rgba(255, 255, 255, 0.88)',
             lineHeight: '1.6',
-            marginBottom: '36px'
+            marginBottom: '28px',
+            maxWidth: '620px',
+            marginLeft: 'auto',
+            marginRight: 'auto'
           }}
         >
           Consult with our board-certified specialists. Book online in 2 minutes with instant confirmation and dedicated patient concierge support.
         </p>
 
-        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '16px', flexWrap: 'wrap' }}>
+        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '12px', flexWrap: 'wrap' }}>
           <button
             onClick={onBookClick}
-            className="btn btn-secondary btn-lg"
+            className="btn btn-secondary btn-lg btn-mobile-block"
             style={{
               background: '#FFFFFF',
               color: 'var(--primary-darker)',
@@ -120,7 +123,7 @@ export const DarkCtaSection: React.FC<DarkCtaSectionProps> = ({ onBookClick }) =
 
           <a
             href={`tel:${CLINIC_INFO.phone}`}
-            className="btn btn-ghost btn-lg"
+            className="btn btn-ghost btn-lg btn-mobile-block"
             style={{
               color: '#FFFFFF',
               border: '1.5px solid rgba(255, 255, 255, 0.4)',

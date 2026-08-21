@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Menu, X, Phone, Calendar } from 'lucide-react';
+import { Menu, X, Calendar, Phone, ArrowRight } from 'lucide-react';
 import { CLINIC_INFO } from '../../data/mockData';
 
 interface NavbarProps {
@@ -19,9 +19,21 @@ export const Navbar: React.FC<NavbarProps> = ({ currentPath, onNavigate }) => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
+  // Lock body scroll when mobile menu is open
+  useEffect(() => {
+    if (mobileMenuOpen) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = 'unset';
+    }
+    return () => {
+      document.body.style.overflow = 'unset';
+    };
+  }, [mobileMenuOpen]);
+
   const navItems = [
     { label: 'Home', path: '/' },
-    { label: 'Specialties & Care', path: '/treatments' },
+    { label: 'Specialties', path: '/treatments' },
     { label: 'Specialists', path: '/doctors' },
     { label: 'Facilities', path: '/facilities' },
     { label: 'About Clinic', path: '/about' },
@@ -29,13 +41,18 @@ export const Navbar: React.FC<NavbarProps> = ({ currentPath, onNavigate }) => {
     { label: 'Contact', path: '/contact' },
   ];
 
+  const handleNavClick = (path: string) => {
+    onNavigate(path);
+    setMobileMenuOpen(false);
+  };
+
   return (
     <header
       style={{
         position: 'sticky',
         top: 0,
         zIndex: 100,
-        backgroundColor: isScrolled ? 'rgba(255, 255, 255, 0.92)' : 'rgba(255, 255, 255, 0.98)',
+        backgroundColor: isScrolled ? 'rgba(255, 255, 255, 0.94)' : 'rgba(255, 255, 255, 0.98)',
         backdropFilter: 'blur(16px)',
         WebkitBackdropFilter: 'blur(16px)',
         borderBottom: '1px solid var(--border)',
@@ -43,48 +60,49 @@ export const Navbar: React.FC<NavbarProps> = ({ currentPath, onNavigate }) => {
         transition: 'all 240ms var(--ease-out)'
       }}
     >
-      <div className="container" style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', height: '76px' }}>
+      <div className="container" style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', height: '72px' }}>
         {/* Brand Logo */}
         <div 
-          onClick={() => onNavigate('/')}
-          style={{ display: 'flex', alignItems: 'center', gap: '12px', cursor: 'pointer' }}
+          onClick={() => handleNavClick('/')}
+          style={{ display: 'flex', alignItems: 'center', gap: '10px', cursor: 'pointer', userSelect: 'none' }}
         >
           <div 
             style={{
-              width: '42px',
-              height: '42px',
+              width: '38px',
+              height: '38px',
               borderRadius: 'var(--radius-sm)',
               background: 'linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%)',
               display: 'flex',
               alignItems: 'center',
               justifyContent: 'center',
               color: '#FFFFFF',
-              boxShadow: 'var(--elevation-1)'
+              boxShadow: 'var(--elevation-1)',
+              flexShrink: 0
             }}
           >
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
               <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
               <path d="m9 12 2 2 4-4"/>
             </svg>
           </div>
           <div>
-            <div style={{ fontSize: '20px', fontWeight: '800', letterSpacing: '-0.03em', color: 'var(--text-primary)', lineHeight: 1.1 }}>
+            <div style={{ fontSize: 'clamp(17px, 2.5vw, 20px)', fontWeight: '800', letterSpacing: '-0.03em', color: 'var(--text-primary)', lineHeight: 1.1 }}>
               AUREVIA<span style={{ color: 'var(--primary)' }}>HEALTH</span>
             </div>
-            <div style={{ fontSize: '10px', fontWeight: '600', letterSpacing: '0.12em', color: 'var(--text-secondary)', textTransform: 'uppercase' }}>
-              Specialist Clinic & Diagnostics
+            <div style={{ fontSize: '9.5px', fontWeight: '600', letterSpacing: '0.12em', color: 'var(--text-secondary)', textTransform: 'uppercase' }}>
+              Specialist Clinic
             </div>
           </div>
         </div>
 
-        {/* Desktop Navigation Links (NO Admin link visible to public) */}
-        <nav className="desktop-nav" style={{ display: 'flex', alignItems: 'center', gap: '28px' }}>
+        {/* Desktop Navigation Links */}
+        <nav className="desktop-only" style={{ alignItems: 'center', gap: '24px' }}>
           {navItems.map((item) => {
             const isActive = currentPath === item.path;
             return (
               <button
                 key={item.path}
-                onClick={() => onNavigate(item.path)}
+                onClick={() => handleNavClick(item.path)}
                 style={{
                   background: 'none',
                   border: 'none',
@@ -118,81 +136,123 @@ export const Navbar: React.FC<NavbarProps> = ({ currentPath, onNavigate }) => {
           })}
         </nav>
 
-        {/* Action CTA & Mobile Hamburger */}
-        <div style={{ display: 'flex', alignItems: 'center', gap: '16px' }}>
+        {/* Action CTAs & Mobile Hamburger */}
+        <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
           <button
-            onClick={() => onNavigate('/appointment')}
-            className="btn-primary"
-            style={{ padding: '10px 20px', fontSize: '14px' }}
+            onClick={() => handleNavClick('/appointment')}
+            className="btn btn-primary btn-sm desktop-only"
+            style={{ fontSize: '13.5px', padding: '9px 18px' }}
           >
-            <Calendar size={16} />
+            <Calendar size={15} />
             <span>Book Appointment</span>
           </button>
 
-          {/* Mobile Hamburger Toggle */}
+          {/* Mobile Hamburger Toggle Button */}
           <button
-            className="mobile-menu-toggle"
+            className="mobile-only"
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
             style={{
-              background: 'none',
-              border: 'none',
+              background: 'var(--surface-soft)',
+              border: '1px solid var(--border)',
+              borderRadius: 'var(--radius-sm)',
               cursor: 'pointer',
               color: 'var(--text-primary)',
-              padding: '6px',
-              display: 'none'
+              padding: '8px',
+              minWidth: '40px',
+              minHeight: '40px',
+              alignItems: 'center',
+              justifyContent: 'center'
             }}
-            aria-label="Toggle menu"
+            aria-label="Toggle Navigation Menu"
           >
-            {mobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
+            {mobileMenuOpen ? <X size={22} color="var(--text-primary)" /> : <Menu size={22} color="var(--text-primary)" />}
           </button>
         </div>
       </div>
 
-      {/* Mobile Drawer Menu */}
+      {/* Mobile Drawer Menu with Backdrop Overlay */}
       {mobileMenuOpen && (
-        <div
+        <div 
           style={{
-            background: '#FFFFFF',
-            borderTop: '1px solid var(--border)',
-            padding: '20px 24px',
+            position: 'fixed',
+            top: '72px',
+            left: 0,
+            right: 0,
+            bottom: 0,
+            background: 'rgba(15, 23, 42, 0.6)',
+            backdropFilter: 'blur(4px)',
+            zIndex: 99,
             display: 'flex',
-            flexDirection: 'column',
-            gap: '16px',
-            boxShadow: 'var(--elevation-3)'
+            flexDirection: 'column'
           }}
+          onClick={() => setMobileMenuOpen(false)}
         >
-          {navItems.map((item) => (
-            <button
-              key={item.path}
-              onClick={() => {
-                onNavigate(item.path);
-                setMobileMenuOpen(false);
-              }}
-              style={{
-                textAlign: 'left',
-                background: 'none',
-                border: 'none',
-                fontSize: '15px',
-                fontWeight: currentPath === item.path ? '700' : '500',
-                color: currentPath === item.path ? 'var(--primary)' : 'var(--text-primary)',
-                padding: '8px 0',
-                cursor: 'pointer'
-              }}
-            >
-              {item.label}
-            </button>
-          ))}
-          <button
-            onClick={() => {
-              onNavigate('/appointment');
-              setMobileMenuOpen(false);
+          <div
+            onClick={(e) => e.stopPropagation()}
+            style={{
+              background: '#FFFFFF',
+              borderBottom: '1px solid var(--border)',
+              padding: '24px 20px',
+              display: 'flex',
+              flexDirection: 'column',
+              gap: '6px',
+              boxShadow: 'var(--elevation-4)',
+              maxHeight: 'calc(100vh - 80px)',
+              overflowY: 'auto'
             }}
-            className="btn-primary"
-            style={{ marginTop: '8px', width: '100%', justifyContent: 'center' }}
           >
-            <Calendar size={16} />
-            <span>Book Appointment</span>
-          </button>
+            <div style={{ fontSize: '11px', fontWeight: '700', letterSpacing: '1px', textTransform: 'uppercase', color: 'var(--text-tertiary)', marginBottom: '8px' }}>
+              Navigation
+            </div>
+
+            {navItems.map((item) => {
+              const isActive = currentPath === item.path;
+              return (
+                <button
+                  key={item.path}
+                  onClick={() => handleNavClick(item.path)}
+                  style={{
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'space-between',
+                    textAlign: 'left',
+                    background: isActive ? 'var(--primary-alpha-10)' : 'transparent',
+                    border: 'none',
+                    borderRadius: 'var(--radius-sm)',
+                    fontSize: '15px',
+                    fontWeight: isActive ? '700' : '500',
+                    color: isActive ? 'var(--primary)' : 'var(--text-primary)',
+                    padding: '12px 14px',
+                    cursor: 'pointer',
+                    transition: 'background 160ms ease'
+                  }}
+                >
+                  <span>{item.label}</span>
+                  <ArrowRight size={16} color={isActive ? 'var(--primary)' : 'var(--text-muted)'} />
+                </button>
+              );
+            })}
+
+            <div style={{ paddingTop: '16px', borderTop: '1px solid var(--border)', marginTop: '12px', display: 'flex', flexDirection: 'column', gap: '10px' }}>
+              <button
+                onClick={() => handleNavClick('/appointment')}
+                className="btn btn-primary"
+                style={{ width: '100%', justifyContent: 'center', minHeight: '48px', fontSize: '15px' }}
+              >
+                <Calendar size={18} />
+                <span>Book Consultation Slot</span>
+              </button>
+
+              <a
+                href={`tel:${CLINIC_INFO.phone}`}
+                className="btn btn-secondary"
+                style={{ width: '100%', justifyContent: 'center', minHeight: '44px', fontSize: '14px' }}
+              >
+                <Phone size={16} />
+                <span>Emergency: {CLINIC_INFO.emergencyPhone}</span>
+              </a>
+            </div>
+          </div>
         </div>
       )}
     </header>

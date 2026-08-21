@@ -4,28 +4,28 @@ import { Award, Users, Stethoscope, Star } from 'lucide-react';
 export const TrustMetricsSection: React.FC = () => {
   const metrics = [
     {
-      icon: <Award size={28} color="var(--primary)" />,
+      icon: <Award size={24} color="var(--primary)" />,
       number: '16+',
-      label: 'Years of Clinical Excellence',
-      sub: 'Serving Delhi NCR & global patients'
+      label: 'Years of Clinical Care',
+      sub: 'Serving NCR & global patients'
     },
     {
-      icon: <Users size={28} color="var(--primary)" />,
+      icon: <Users size={24} color="var(--primary)" />,
       number: '25,000+',
-      label: 'Patients Healed & Treated',
-      sub: 'Across 8 core clinical specialties'
+      label: 'Patients Treated',
+      sub: 'Across 8 core specialties'
     },
     {
-      icon: <Stethoscope size={28} color="var(--primary)" />,
+      icon: <Stethoscope size={24} color="var(--primary)" />,
       number: '20+',
-      label: 'Board-Certified Specialists',
-      sub: 'Top medical university alumni'
+      label: 'Specialist Doctors',
+      sub: 'AIIMS & UK trained alumni'
     },
     {
-      icon: <Star size={28} color="#F59E0B" fill="#F59E0B" />,
+      icon: <Star size={24} color="#F59E0B" fill="#F59E0B" />,
       number: '4.95★',
-      label: 'Patient Trust & Satisfaction',
-      sub: 'Based on 1,280+ verified reviews'
+      label: 'Patient Rating',
+      sub: '1,280+ verified reviews'
     }
   ];
 
@@ -35,15 +35,15 @@ export const TrustMetricsSection: React.FC = () => {
         background: '#FFFFFF',
         borderTop: '1px solid var(--border)',
         borderBottom: '1px solid var(--border)',
-        padding: '56px 0'
+        padding: 'clamp(32px, 4vw, 56px) 0'
       }}
     >
       <div className="container">
         <div 
           style={{
             display: 'grid',
-            gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))',
-            gap: '32px'
+            gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 140px), 1fr))',
+            gap: 'clamp(16px, 3vw, 32px)'
           }}
         >
           {metrics.map((m, idx) => (
@@ -54,20 +54,20 @@ export const TrustMetricsSection: React.FC = () => {
                 flexDirection: 'column',
                 alignItems: 'center',
                 textAlign: 'center',
-                padding: '16px'
+                padding: 'clamp(8px, 1.5vw, 16px)'
               }}
             >
               <div 
                 style={{
-                  width: '56px',
-                  height: '56px',
-                  borderRadius: '16px',
+                  width: 'clamp(44px, 5vw, 56px)',
+                  height: 'clamp(44px, 5vw, 56px)',
+                  borderRadius: '14px',
                   background: 'var(--surface-soft)',
                   border: '1px solid var(--border)',
                   display: 'flex',
                   alignItems: 'center',
                   justifyContent: 'center',
-                  marginBottom: '16px'
+                  marginBottom: '12px'
                 }}
               >
                 {m.icon}
@@ -76,12 +76,12 @@ export const TrustMetricsSection: React.FC = () => {
               <div 
                 style={{
                   fontFamily: 'var(--font-primary)',
-                  fontSize: 'clamp(32px, 3.5vw, 42px)',
+                  fontSize: 'clamp(24px, 3.2vw, 38px)',
                   fontWeight: '800',
                   color: 'var(--primary)',
-                  letterSpacing: '-1px',
+                  letterSpacing: '-0.8px',
                   lineHeight: '1.1',
-                  marginBottom: '6px'
+                  marginBottom: '4px'
                 }}
               >
                 {m.number}
@@ -89,10 +89,10 @@ export const TrustMetricsSection: React.FC = () => {
 
               <div 
                 style={{
-                  fontSize: '15px',
+                  fontSize: 'clamp(12.5px, 1.2vw, 14.5px)',
                   fontWeight: '700',
                   color: 'var(--text-primary)',
-                  marginBottom: '4px'
+                  marginBottom: '2px'
                 }}
               >
                 {m.label}
@@ -100,7 +100,7 @@ export const TrustMetricsSection: React.FC = () => {
 
               <div 
                 style={{
-                  fontSize: '12px',
+                  fontSize: 'clamp(11px, 1vw, 12.5px)',
                   color: 'var(--text-tertiary)'
                 }}
               >

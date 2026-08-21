@@ -12,8 +12,8 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ onBookClick, onExplore
     <section 
       style={{
         position: 'relative',
-        paddingTop: 'clamp(32px, 5vw, 64px)',
-        paddingBottom: 'clamp(48px, 6vw, 80px)',
+        paddingTop: 'clamp(28px, 4.5vw, 64px)',
+        paddingBottom: 'clamp(40px, 5.5vw, 80px)',
         overflow: 'hidden'
       }}
     >
@@ -21,31 +21,31 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ onBookClick, onExplore
         <div 
           style={{
             display: 'grid',
-            gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))',
+            gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 340px), 1fr))',
             alignItems: 'center',
-            gap: 'clamp(32px, 5vw, 64px)'
+            gap: 'clamp(28px, 4vw, 56px)'
           }}
         >
-          {/* Left Column (55% on desktop) */}
+          {/* Left Column (Content & CTAs) */}
           <div style={{ maxWidth: '620px' }}>
             <div 
               style={{
                 display: 'inline-flex',
                 alignItems: 'center',
                 gap: '8px',
-                padding: '6px 14px',
+                padding: '6px 12px',
                 borderRadius: 'var(--radius-full)',
                 background: 'var(--primary-alpha-10)',
                 color: 'var(--primary)',
                 border: '1px solid var(--primary-alpha-20)',
-                fontSize: '12px',
+                fontSize: 'clamp(11px, 1.2vw, 12px)',
                 fontWeight: '700',
                 textTransform: 'uppercase',
                 letterSpacing: '1px',
-                marginBottom: '20px'
+                marginBottom: '16px'
               }}
             >
-              <ShieldCheck size={16} />
+              <ShieldCheck size={15} />
               <span>Modern Healthcare. Human Care.</span>
             </div>
 
@@ -53,8 +53,8 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ onBookClick, onExplore
               className="display-lg"
               style={{ 
                 color: 'var(--text-primary)', 
-                marginBottom: '20px',
-                letterSpacing: '-1.5px'
+                marginBottom: '18px',
+                letterSpacing: '-1.2px'
               }}
             >
               Exceptional Medical Care, <br />
@@ -73,18 +73,26 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ onBookClick, onExplore
               className="body-large"
               style={{ 
                 color: 'var(--text-secondary)', 
-                marginBottom: '32px',
+                marginBottom: '28px',
                 maxWidth: '540px'
               }}
             >
               Experience world-class multi-specialty clinical care. Verified board specialists, advanced same-day diagnostics, and frictionless appointment booking.
             </p>
 
-            {/* CTAs */}
-            <div style={{ display: 'flex', alignItems: 'center', gap: '16px', flexWrap: 'wrap', marginBottom: '40px' }}>
+            {/* CTAs (Stack on mobile, row on desktop) */}
+            <div 
+              style={{ 
+                display: 'flex', 
+                alignItems: 'stretch', 
+                gap: '12px', 
+                flexWrap: 'wrap', 
+                marginBottom: '32px' 
+              }}
+            >
               <button 
                 onClick={onBookClick}
-                className="btn btn-primary btn-lg"
+                className="btn btn-primary btn-lg btn-mobile-block"
                 style={{ boxShadow: 'var(--shadow-glow)' }}
               >
                 <Calendar size={18} />
@@ -93,7 +101,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ onBookClick, onExplore
 
               <button 
                 onClick={onExploreClick}
-                className="btn btn-secondary btn-lg"
+                className="btn btn-secondary btn-lg btn-mobile-block"
               >
                 <span>Explore Specialties</span>
                 <ArrowRight size={18} />
@@ -105,8 +113,8 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ onBookClick, onExplore
               style={{ 
                 display: 'flex', 
                 alignItems: 'center', 
-                gap: '24px', 
-                paddingTop: '24px', 
+                gap: '16px 20px', 
+                paddingTop: '20px', 
                 borderTop: '1px solid var(--border)',
                 flexWrap: 'wrap'
               }}
@@ -134,14 +142,14 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ onBookClick, onExplore
             </div>
           </div>
 
-          {/* Right Column: Hero Visual with Floating Glass Badges */}
-          <div style={{ position: 'relative' }}>
+          {/* Right Column: Hero Visual with Safe Floating Glass Badges */}
+          <div style={{ position: 'relative', width: '100%', maxWidth: '560px', margin: '0 auto' }}>
             <div 
               style={{
-                borderRadius: '28px',
+                borderRadius: 'clamp(18px, 3vw, 28px)',
                 overflow: 'hidden',
                 boxShadow: 'var(--elevation-4)',
-                border: '4px solid #FFFFFF',
+                border: '3px solid #FFFFFF',
                 position: 'relative'
               }}
             >
@@ -150,7 +158,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ onBookClick, onExplore
                 alt="Aurevia Health Clinic Suite"
                 style={{
                   width: '100%',
-                  height: '480px',
+                  height: 'clamp(260px, 40vw, 460px)',
                   objectFit: 'cover'
                 }}
               />
@@ -163,41 +171,42 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ onBookClick, onExplore
               />
             </div>
 
-            {/* Floating Glass Badge 1: Rating */}
+            {/* Floating Glass Badge 1: Rating (Safe Positioning) */}
             <div
               className="glass-panel"
               style={{
                 position: 'absolute',
-                bottom: '-20px',
-                left: '20px',
-                padding: '14px 20px',
+                bottom: '12px',
+                left: '12px',
+                padding: '10px 16px',
                 borderRadius: 'var(--radius-md)',
                 display: 'flex',
                 alignItems: 'center',
-                gap: '12px',
-                maxWidth: '280px',
+                gap: '10px',
+                maxWidth: 'calc(100% - 24px)',
                 boxShadow: 'var(--elevation-3)'
               }}
             >
               <div 
                 style={{
-                  width: '40px',
-                  height: '40px',
+                  width: '36px',
+                  height: '36px',
                   borderRadius: '50%',
                   background: 'var(--primary-alpha-10)',
                   display: 'flex',
                   alignItems: 'center',
                   justifyContent: 'center',
-                  color: 'var(--primary)'
+                  color: 'var(--primary)',
+                  flexShrink: 0
                 }}
               >
-                <Star size={20} fill="#F59E0B" color="#F59E0B" />
+                <Star size={18} fill="#F59E0B" color="#F59E0B" />
               </div>
               <div>
-                <div style={{ fontSize: '14px', fontWeight: '700', color: 'var(--text-primary)' }}>
+                <div style={{ fontSize: '13px', fontWeight: '700', color: 'var(--text-primary)' }}>
                   4.9★ Google Rating
                 </div>
-                <div style={{ fontSize: '12px', color: 'var(--text-tertiary)' }}>
+                <div style={{ fontSize: '11px', color: 'var(--text-tertiary)' }}>
                   1,280+ Verified Patients
                 </div>
               </div>
@@ -208,22 +217,22 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ onBookClick, onExplore
               className="glass-panel"
               style={{
                 position: 'absolute',
-                top: '24px',
-                right: '-16px',
-                padding: '12px 18px',
+                top: '12px',
+                right: '12px',
+                padding: '8px 14px',
                 borderRadius: 'var(--radius-md)',
                 display: 'flex',
                 alignItems: 'center',
-                gap: '10px',
+                gap: '8px',
                 boxShadow: 'var(--elevation-3)'
               }}
             >
-              <Award size={20} color="var(--primary)" />
+              <Award size={18} color="var(--primary)" />
               <div>
-                <div style={{ fontSize: '13px', fontWeight: '700', color: 'var(--text-primary)' }}>
+                <div style={{ fontSize: '12px', fontWeight: '700', color: 'var(--text-primary)' }}>
                   Top 1% Specialists
                 </div>
-                <div style={{ fontSize: '11px', color: 'var(--text-tertiary)' }}>
+                <div style={{ fontSize: '10px', color: 'var(--text-tertiary)' }}>
                   AIIMS & UK Trained
                 </div>
               </div>

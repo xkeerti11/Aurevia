@@ -160,18 +160,19 @@ export const BookingWizard: React.FC<BookingWizardProps> = ({
 
   return (
     <div style={{ maxWidth: '880px', margin: '0 auto', padding: '24px 16px' }}>
-      {/* Progress Stepper Header */}
+      {/* Responsive Progress Stepper Header */}
       <div 
         style={{ 
           background: '#FFFFFF', 
           borderRadius: 'var(--radius-md)', 
-          padding: '24px', 
+          padding: 'clamp(16px, 3vw, 24px)', 
           boxShadow: 'var(--elevation-1)',
           border: '1px solid var(--border)',
-          marginBottom: '32px'
+          marginBottom: '24px'
         }}
       >
-        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', position: 'relative' }}>
+        {/* Desktop Stepper View */}
+        <div className="desktop-only" style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', position: 'relative' }}>
           {/* Connector Line behind steps */}
           <div 
             style={{
@@ -236,13 +237,36 @@ export const BookingWizard: React.FC<BookingWizardProps> = ({
                     fontWeight: isCurrent ? '700' : '500',
                     color: isCurrent ? 'var(--primary)' : isCompleted ? 'var(--text-primary)' : 'var(--text-muted)'
                   }}
-                  className="hide-on-very-small"
                 >
                   {label}
                 </span>
               </div>
             );
           })}
+        </div>
+
+        {/* Mobile Stepper View (Compact Clean Progress) */}
+        <div className="mobile-only" style={{ flexDirection: 'column', gap: '8px', width: '100%' }}>
+          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+            <span style={{ fontSize: '12px', fontWeight: '700', color: 'var(--primary)', textTransform: 'uppercase', letterSpacing: '0.8px' }}>
+              Step {currentStep} of {stepLabels.length}
+            </span>
+            <span style={{ fontSize: '13px', fontWeight: '700', color: 'var(--text-primary)' }}>
+              {stepLabels[currentStep - 1]}
+            </span>
+          </div>
+
+          {/* Progress bar */}
+          <div style={{ width: '100%', height: '6px', background: 'var(--surface-soft)', borderRadius: '3px', overflow: 'hidden', border: '1px solid var(--border)' }}>
+            <div 
+              style={{
+                height: '100%',
+                background: 'linear-gradient(90deg, var(--primary) 0%, var(--primary-light) 100%)',
+                width: `${(currentStep / stepLabels.length) * 100}%`,
+                transition: 'width 250ms ease-out'
+              }}
+            />
+          </div>
         </div>
       </div>
 

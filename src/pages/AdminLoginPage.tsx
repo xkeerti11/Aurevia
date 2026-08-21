@@ -111,15 +111,14 @@ export const AdminLoginPage: React.FC<AdminLoginPageProps> = ({
     <div style={{ minHeight: '100vh', display: 'flex', background: 'linear-gradient(135deg, #F0FDFA 0%, #E0F2FE 100%)' }}>
       {/* Left Column: Branding Showcase (Desktop) */}
       <div 
+        className="desktop-only"
         style={{
           flex: '1 1 50%',
-          padding: '64px 80px',
-          display: 'flex',
+          padding: 'clamp(32px, 5vw, 64px)',
           flexDirection: 'column',
           justifyContent: 'space-between',
           borderRight: '1px solid rgba(15, 118, 110, 0.12)'
         }}
-        className="hidden md:flex"
       >
         <div>
           <div 
